@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本导出TXT工具 | Screenshot_20251101_073934_com.larus.nova.png</title>
+    <style>
+        body {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 15px;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #333;
+        }
+        .tool-section {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        textarea {
+            width: 100%;
+            height: 300px;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+        button {
+            display: block;
+            width: 100%;
+            max-width: 200px;
+            margin: 15px auto 0;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .author-info {
+            margin-top: 40px;
+            text-align: center;
+            padding: 20px;
+            background-color: #e9f5e9;
+            border-radius: 8px;
+        }
+        .author-info h2 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .author-info p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>文本导出为TXT工具</h1>
+        <p>由 Screenshot_20251101_073934_com.larus.nova.png 开发</p>
+    </header>
+
+    <div class="tool-section">
+        <textarea id="textInput" placeholder="请在此输入需要导出的文本..."></textarea>
+        <button onclick="exportToTxt()">导出为TXT文件</button>
+    </div>
+
+    <div class="author-info">
+        <h2>作者信息</h2>
+        <p>用户名：Screenshot_20251101_073934_com.larus.nova.png</p>
+        <p>QQ号：3592175902</p>
+    </div>
+
+    <script>
+        function exportToTxt() {
+            const text = document.getElementById('textInput').value;
+            if (!text.trim()) {
+                alert('请先输入文本内容！');
+                return;
+            }
+
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = '导出文本_' + new Date().toLocaleDateString().replace(/\//g, '-') + '.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
